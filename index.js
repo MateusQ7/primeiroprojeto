@@ -61,36 +61,18 @@ function getExtension(fileName) {
 }
 
 function getDateAndTime(fileName) {
-  const regExp = /(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g;
-  const dateAndTime = fileName.match(regExp);
-  let date = dateFormat(dateAndTime[0], "yyyyddMM");
-  let time = dateAndTime[1].substring(0, 5).replace("-", "");
-  return date + "-" + time;
+  const splittedName = fileName.split("(")
+  const date = splittedName[1].substring(0, 10)
+  const ddMMyyyy = date.replace(/-/gm,'')
+  const yyyyMMdd = ddMMyyyy.substring(4,8) + ddMMyyyy.substring(2,4) + ddMMyyyy.substring(0,2)
+
+  const time = fileName.split("_")[1].replace('-','').substring(0,4)
+
+  return yyyyMMdd + "-" + time;
 }
+try{
+  changeFileNames('./teste/');
 
-function dateFormat(inputDate, format) {
-  //parse the input date
-  const date = new Date(inputDate);
-
-  //extract the parts of the date
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  //replace the month
-  format = format.replace("MM", month.toString().padStart(2, "0"));
-
-  //replace the year
-  if (format.indexOf("yyyy") > -1) {
-    format = format.replace("yyyy", year.toString());
-  } else if (format.indexOf("yy") > -1) {
-    format = format.replace("yy", year.toString().substr(2, 2));
-  }
-
-  //replace the day
-  format = format.replace("dd", day.toString().padStart(2, "0"));
-
-  return format;
+}catch(err){
+  console.log(err);
 }
-
-changeFileNames('C:\\Users\\mlour\\OneDrive\\Documentos\\scriptMudarNome\\teste\\');
