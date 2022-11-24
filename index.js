@@ -48,7 +48,7 @@ function changeFileNames(path){
   for(let i=0;i<oldNames.length;i++){
     let oldPath = oldNames[i];
     let newPath = newNames[i];
-    fs.renameSync(path + oldPath, path + newPath.replace('.jpg'));
+    fs.renameSync(path + oldPath, path + newPath);
   }
 }
 
