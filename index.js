@@ -26,7 +26,7 @@ function getFileNames() {
     const cam = getCam(file);
     const ext = getExtension(file);
 
-    let newName = date + "-" + cam + "_Preset04" + ext;
+    let newName = date + "-" + cam + "_Preset01" + ext;
     
     fileNewName.push(newName);
   })
